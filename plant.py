@@ -6,20 +6,22 @@ class Plant(object):
 # axiom is a string, variables are a list of strings,
 # rules are a dictionary
     def __init__(self,axiom,**rules):
-        self.instructions = axiom
+        self.axiom = axiom
         self.rules = rules
 
-    def generate(self,iterations=1):
+    def generate_instructions(self,iterations=1):
+        instructions = self.axiom
         for iter in range(iterations):
             new_instructions = ""
-            for i in self.instructions:
+            for i in instructions:
                 if i in self.rules.keys():
                     new_instructions += self.rules[i]
                 else:
                     new_instructions += i
 
-            self.instructions = new_instructions
+            instructions = new_instructions
+        return instructions
 
 
-test_plant = Plant('A',A='AB',B='A')
-test_plant.generate(5)
+test_plant = Plant('X',X='F+[[X]-X]-F[-FX]+X',F='FF')
+print(test_plant.generate_instructions(2))

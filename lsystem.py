@@ -6,7 +6,7 @@ class LSystem(object):
     def get_instructions(self,iterations):
         if iterations == 0:
             return self.axiom
-            
+
         instructions = self.axiom
         for iter in range(iterations):
             new_instructions = ""

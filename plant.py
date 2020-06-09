@@ -7,5 +7,7 @@ class Plant(object):
         self.lsystem = lsystem
         self.iterations = iterations
 
+        self.stalk_length *= 0.5**self.iterations
+
     def get_formula(self):
         return self.lsystem.get_instructions(self.iterations)

@@ -1,15 +1,15 @@
 import math
 import turtleSystem as ts
-import turtle as t
 
 class Plant(object):
     # axiom is a string
     # rules is a dictionary
-    def __init__(self,axiom,window,**rules):
+    def __init__(self,axiom,length,window,**rules):
         self.axiom = axiom
         self.instructions = axiom
-        self.rules = rules
+        self.length = length
         self.window = window
+        self.rules = rules
 
     # sets the set of instructions to draw the plant.
     # input: n = number of iterations in the L-System algorithm.
@@ -44,7 +44,7 @@ class Plant(object):
             self.generate(n)
 
         # create a turtle instance to draw plant
-        turtleSystem = ts.TurtleSystem(t.Turtle([200,0],math.pi/2,self.window))
+        turtleSystem = ts.TurtleSystem([200,0],self.length,math.pi/2,self.window)
 
         for i in self.instructions:
             if i == "+":
@@ -52,7 +52,7 @@ class Plant(object):
             elif i == "-":
                 turtleSystem.rotate(-angle)
             elif i == "F":
-                turtleSystem.move_forward(20)
+                turtleSystem.move_forward()
             elif i == "[":
                 turtleSystem.push()
             elif i == "]":

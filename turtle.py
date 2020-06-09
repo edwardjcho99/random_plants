@@ -2,18 +2,15 @@ import math
 from graphics import *
 
 class Turtle(object):
-    def __init__(self,position,length,angle,window):
-        # position is an array [x,y]
+    def __init__(self,window,position,length,width,angle=math.pi/2):
+        self.window = window
         self.position = position
-        # length of base stalk as int
         self.length = length
-        # float in radians
+        self.width = width
         self.angle = angle
 
-        self.window = window
-
-    def rotate(self,angle):
-        self.angle += angle
+    def rotate(self,delta_angle):
+        self.angle += delta_angle
 
     def move_forward(self):
         old_x = self.position[0]
@@ -29,7 +26,8 @@ class Turtle(object):
 
     # make a deep copy of the turtle
     def copy_turtle(self):
-        return Turtle([self.position[0],self.position[1]],
+        return Turtle(self.window,
+                      [self.position[0],self.position[1]],
                       self.length,
-                      self.angle,
-                      self.window)
+                      self.width,
+                      self.angle)

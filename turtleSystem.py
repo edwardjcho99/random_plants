@@ -1,9 +1,9 @@
 import turtle
 
 class TurtleSystem(object):
-    # current is an instance of a Turtle
-    def __init__(self,position,length,angle,window):
-        self.current = turtle.Turtle(position,length,angle,window)
+    def __init__(self,plant,window):
+        self.plant = plant
+        self.current = turtle.Turtle(window,[200,0],plant.stalk_length,plant.thickness)
         self.turtle_stack = []
 
     def push(self):
@@ -12,8 +12,15 @@ class TurtleSystem(object):
     def pop(self):
         return self.turtle_stack.pop()
 
-    def move_forward(self):
-        self.current.move_forward()
-
-    def rotate(self,angle):
-        self.current.rotate(angle)
+    def draw(self):
+        for i in self.plant.get_formula():
+            if i == "+":
+                self.current.rotate(self.plant.delta_angle)
+            elif i == "-":
+                self.current.rotate(-self.plant.delta_angle)
+            elif i == "F":
+                self.current.move_forward()
+            elif i == "[":
+                self.push()
+            elif i == "]":
+                self.current = self.pop()
